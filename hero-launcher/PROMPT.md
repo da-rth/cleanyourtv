@@ -13,17 +13,17 @@ themoviedb.org → Settings → API). Without one the hero shows each app's own 
 ---
 
 ```
-Set up my AIOStreams launcher on this Android TV. My TV model is: <MODEL NAME HERE>.
+Set up my Hero launcher on this Android TV. My TV model is: <MODEL NAME HERE>.
 My TMDB v3 key (optional; leave blank to skip): <KEY or blank>
 
 Work on the real device, step by step, and check what you do with screenshots pulled from the TV. Ask me before
 anything that depends on my preferences. Never print, log or commit my TMDB key.
 
 0. Get the code
-   git clone -b aios-launcher https://github.com/da-rth/cleanyourtv && cd cleanyourtv
+   git clone -b hero-launcher https://github.com/da-rth/cleanyourtv && cd cleanyourtv
    Read PROMPT.md at the repo root and follow its Connect, Back up first, Debloat and Verify sections exactly (ADB
    connection tricks, the backup and restore script, the packages never to disable, small batches with a screenshot between
-   them, closing network ADB at the end). Then read aios-launcher/README.md. Use the repo's tools/ scripts, not your own.
+   them, closing network ADB at the end). Then read hero-launcher/README.md. Use the repo's tools/ scripts, not your own.
 
 1. Connect, back up, debloat (from the root PROMPT.md)
    - Start from the closest list in examples/ for this TV (same device name and firmware). If there is none, build one by the
@@ -34,7 +34,7 @@ anything that depends on my preferences. Never print, log or commit my TMDB key.
      stops casting from a phone to it, and ask.
 
 2. Collect what is specific to this TV and to me (ask me; keep it local)
-   - Nothing about a particular TV or person goes in the repository. Keep it in aios-launcher/local/ (gitignored): write
+   - Nothing about a particular TV or person goes in the repository. Keep it in hero-launcher/local/ (gitignored): write
      profile.json for my choices and, only if this TV needs it, device.json for the TV's own values. Both use the same keys as a
      theme's config.json (themes/README.md lists them).
    - Ask me for: my dock apps (up to 6, in order), my VPN app (optional, the lock pill asks on the TV the first time if it is
@@ -50,7 +50,7 @@ anything that depends on my preferences. Never print, log or commit my TMDB key.
 
 3. Install the launcher with the script, not by hand
    - Needs JDK 17, Android SDK platform 34 and build-tools 34.0.0 (or Docker: tools/docker-build.sh launcher, then SKIP_BUILD=1).
-   - Run: TV_HOST=<tv ip> TMDB_KEY=<the key I gave you> aios-launcher/apply.sh   (leave TMDB_KEY out if I skipped it; the
+   - Run: TV_HOST=<tv ip> TMDB_KEY=<the key I gave you> hero-launcher/apply.sh   (leave TMDB_KEY out if I skipped it; the
      script also asks, with hidden input, when run from a terminal)
      It builds this branch's launcher, installs it, makes it Home (disabling the stock launcher only once Home is confirmed),
      grants READ_TV_LISTINGS and "Display over other apps", and pushes the theme. Set STOCK_LAUNCHER=<package> if the TV's own
@@ -72,12 +72,12 @@ anything that depends on my preferences. Never print, log or commit my TMDB key.
 5. Finish
    - Turn network ADB off, reboot, and run tools/adb-closed.py <tv ip> (the root prompt's closing steps).
    - Write me a short README of what you did for this TV, and a restore command (tools/restore.sh with the list you used).
-   - Do not commit or push anything that is specific to this TV or to me (aios-launcher/local/, package choices, remote
+   - Do not commit or push anything that is specific to this TV or to me (hero-launcher/local/, package choices, remote
      mappings, the key, screenshots of my watch history). If you found a general bug in the launcher or this script, tell me
-     and offer a patch for my fork (da-rth/cleanyourtv, branch aios-launcher), and wait for my yes before pushing.
+     and offer a patch for my fork (da-rth/cleanyourtv, branch hero-launcher), and wait for my yes before pushing.
 ```
 
 ---
 
-Updating later: `git pull`, then run `aios-launcher/apply.sh` again. The launcher's settings (Settings pill) are kept on the
+Updating later: `git pull`, then run `hero-launcher/apply.sh` again. The launcher's settings (Settings pill) are kept on the
 TV and survive a reinstall; the theme is pushed again each time.

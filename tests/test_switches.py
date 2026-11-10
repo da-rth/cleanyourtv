@@ -55,7 +55,7 @@ SCREENSHOT_WANTED = {
     "tile_menu", "top_menu", "vpn_app", "wallpaper", "wallpaper_captions", "wallpaper_dim",
     "wallpaper_moods", "wallpaper_order", "wallpaper_true_color", "wifi_label_width",
     "wifi_status_color",
-    # Fork only (aios-launcher branch): new keys still waiting for a real-TV screenshot in docs/switches.md.
+    # Fork only (hero-launcher branch): new keys still waiting for a real-TV screenshot in docs/switches.md.
     "continue_watching", "tmdb_api_key", "ui_scale_percent", "dock_corner_radius_dp", "pills_expand_on_focus",
 }
 

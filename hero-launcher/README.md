@@ -1,12 +1,12 @@
-# AIOStreams launcher
+# Hero launcher
 
 A fork of the [cleanyourtv](https://github.com/Gathin23/cleanyourtv) reference launcher (`launcher/`) with a Continue
-watching home screen: what you were watching in Netflix, Prime Video, AIOStreams, Stremio and others, with a full-screen hero
+watching home screen: what you were watching in Netflix, Prime Video, Stremio and others, with a full-screen hero
 of the focused title (TMDB backdrop, rating, genres, season and episode, description), then your apps one press of Down away.
-Tested on one Google TV 12 set (see Notes). It lives on the `aios-launcher` branch; `main` follows upstream.
+Tested on one Google TV 12 set (see Notes). It lives on the `hero-launcher` branch; `main` follows upstream.
 
 To put it on a TV: [`PROMPT.md`](PROMPT.md) (a prompt for a coding assistant) or
-`TV_HOST=<ip> aios-launcher/apply.sh` once the TV is debloated.
+`TV_HOST=<ip> hero-launcher/apply.sh` once the TV is debloated.
 
 ## What it adds to the upstream launcher
 

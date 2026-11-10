@@ -16,8 +16,8 @@ upstream, and where:
 
 Row for SHOWCASE.md (Forks of the launcher table): name, what it is, built on (fill in the TV you tested on), by:
 
-> [AIOStreams launcher](https://github.com/da-rth/cleanyourtv/tree/aios-launcher/aios-launcher) | A fork of the launcher with a Continue
-> watching home screen: titles from Netflix, Prime Video, AIOStreams and others (Android TV's Watch Next), a full-screen TMDB hero with
+> [Hero launcher](https://github.com/da-rth/cleanyourtv/tree/hero-launcher/hero-launcher) | A fork of the launcher with a Continue
+> watching home screen: titles from Netflix, Prime Video and others (Android TV's Watch Next), a full-screen TMDB hero with
 > season and episode, apps one press of Down away, a settings dialog and an optional VPN privacy dot. Network: TMDB and the apps'
 > own poster URLs only while the shelf loads; also asks for READ_TV_LISTINGS, "Display over other apps" and a foreground service for
 > the dot | <your TV model>, <its Android or Google TV version> | [da-rth](https://github.com/da-rth)

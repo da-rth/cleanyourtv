@@ -1,22 +1,22 @@
 #!/usr/bin/env bash
-# Build this branch's launcher, install it on a TV, and push the AIOStreams look to it.
+# Build this branch's launcher, install it on a TV, and push the hero look to it.
 # Run from anywhere inside a checkout of this branch. The TV must already be debloated and reachable over ADB
-# (see aios-launcher/PROMPT.md, or PROMPT.md at the repo root for the connection and debloat steps).
+# (see hero-launcher/PROMPT.md, or PROMPT.md at the repo root for the connection and debloat steps).
 #
-#   TV_HOST=192.168.1.50 aios-launcher/apply.sh
+#   TV_HOST=192.168.1.50 hero-launcher/apply.sh
 #
 # Optional environment:
 #   TMDB_KEY=<v3 key>      full-screen hero details from TMDB. Without it the script asks (and offers to save it in the
-#                          gitignored aios-launcher/.tmdb-key); skip it and the hero shows each app's own artwork and title only
+#                          gitignored hero-launcher/.tmdb-key); skip it and the hero shows each app's own artwork and title only
 #   DOCK_APPS=a,b,c        package names for the dock, in order. Without it the script asks the first time and saves the
-#                          answer in aios-launcher/local/profile.json (gitignored)
+#                          answer in hero-launcher/local/profile.json (gitignored)
 #   VPN_APP=<package>      the VPN app the lock pill opens (blank: the lock asks on the TV the first time)
 #   UI_SCALE=<50..125>     interface size percent (default: the theme's 75)
 #   STOCK_LAUNCHER=<pkg>   the TV's own launcher to disable, as launcher/build-and-install.sh takes it ("none" keeps it)
 #   SKIP_BUILD=1           install the APK built earlier
 #
 # Everything specific to one TV or one person (dock apps, VPN app, Live TV package, remote-button mappings, tile pictures)
-# lives in aios-launcher/local/ and is never committed: profile.json for your choices and device.json for the TV's own values
+# lives in hero-launcher/local/ and is never committed: profile.json for your choices and device.json for the TV's own values
 # (same keys as a theme's config.json, see themes/README.md). Both are optional.
 set -euo pipefail
 : "${TV_HOST:?set TV_HOST to the IP address of the TV}"
@@ -43,7 +43,7 @@ if [ -z "$KEY" ] && [ "$ASK" = 1 ]; then
   echo "artwork and title only."
   read -r -s -p "TMDB v3 API key (Enter to skip): " KEY; echo
   if [ -n "$KEY" ]; then
-    read -r -p "Save it on this computer in aios-launcher/.tmdb-key (gitignored) for next time? [Y/n] " yn
+    read -r -p "Save it on this computer in hero-launcher/.tmdb-key (gitignored) for next time? [Y/n] " yn
     case "${yn:-y}" in [Nn]*) ;; *) umask 077; printf '%s\n' "$KEY" > "$HERE/.tmdb-key" ;; esac
   fi
 fi

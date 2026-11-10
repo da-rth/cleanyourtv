@@ -22,7 +22,7 @@ bench-results/
 launcher/hs_err_pid*.log
 launcher/replay_pid*.log
 
-# AIOStreams launcher: your TMDB key stays local
-aios-launcher/.tmdb-key
-aios-launcher/.work/
-aios-launcher/local/
+# Hero launcher: your TMDB key stays local
+hero-launcher/.tmdb-key
+hero-launcher/.work/
+hero-launcher/local/
