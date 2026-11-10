@@ -21,3 +21,8 @@ bench-results/
 *.aab
 launcher/hs_err_pid*.log
 launcher/replay_pid*.log
+
+# AIOStreams launcher: your TMDB key stays local
+aios-launcher/.tmdb-key
+aios-launcher/.work/
+aios-launcher/local/

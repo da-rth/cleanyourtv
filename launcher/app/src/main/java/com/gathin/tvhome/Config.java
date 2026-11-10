@@ -436,6 +436,68 @@ final class Config {
         return ctx.getExternalFilesDir(null);
     }
 
+    /**
+     * ui_scale_percent (config.xml, or "ui_scale_percent" in a theme's config.json): how large Home draws, as a
+     * percentage of normal, 50 to 150. Read before the activity has its resources, so it is a lookup of its own.
+     */
+    static int uiScalePercent(Context ctx) {
+        int pct = ctx.getResources().getInteger(R.integer.ui_scale_percent);
+        File dir = dir(ctx);
+        File file = dir != null ? new File(dir, FILE_NAME) : null;
+        JSONObject json = readOverlay(ctx, file, Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()));
+        if (json != null) pct = integer(json, "ui_scale_percent", pct, 50, 150);
+        pct = UserPrefs.integer(ctx, "ui_scale_percent", pct);
+        return Math.max(50, Math.min(150, pct));
+    }
+
+    /** dock_corner_radius_dp (config.xml, or in a theme's config.json): the dock band's corner radius in dp; 0 is automatic. */
+    static int dockCornerRadiusDp(Context ctx) {
+        int dp = ctx.getResources().getInteger(R.integer.dock_corner_radius_dp);
+        File dir = dir(ctx);
+        File file = dir != null ? new File(dir, FILE_NAME) : null;
+        JSONObject json = readOverlay(ctx, file, Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()));
+        if (json != null) dp = integer(json, "dock_corner_radius_dp", dp, 0, 60);
+        return Math.max(0, Math.min(60, dp));
+    }
+
+    /** continue_watching (config.xml, or in a theme's config.json): the Continue watching shelf above the dock. */
+    static boolean continueWatching(Context ctx) {
+        boolean on = ctx.getResources().getBoolean(R.bool.continue_watching);
+        File dir = dir(ctx);
+        File file = dir != null ? new File(dir, FILE_NAME) : null;
+        JSONObject json = readOverlay(ctx, file, Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()));
+        if (json != null) on = json.optBoolean("continue_watching", on);
+        return UserPrefs.bool(ctx, "continue_watching", on);
+    }
+
+    /** tmdb_api_key (a theme's config.json only): a TMDB v3 API key; with it the Continue watching shelf gets a full-screen hero. */
+    static String tmdbApiKey(Context ctx) {
+        File dir = dir(ctx);
+        File file = dir != null ? new File(dir, FILE_NAME) : null;
+        JSONObject json = readOverlay(ctx, file, Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()));
+        return json == null ? "" : json.optString("tmdb_api_key", "").trim();
+    }
+
+    /** pills_expand_on_focus (config.xml, or in a theme's config.json): icon-only pills show their label while focused. */
+    static boolean pillsExpandOnFocus(Context ctx) {
+        boolean on = ctx.getResources().getBoolean(R.bool.pills_expand_on_focus);
+        File dir = dir(ctx);
+        File file = dir != null ? new File(dir, FILE_NAME) : null;
+        JSONObject json = readOverlay(ctx, file, Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()));
+        if (json != null) on = json.optBoolean("pills_expand_on_focus", on);
+        return UserPrefs.bool(ctx, "pills_expand_on_focus", on);
+    }
+
+    /** Options dialog: the TMDB hero (needs a tmdb_api_key too). On unless switched off there. */
+    static boolean tmdbHeroEnabled(Context ctx) {
+        return UserPrefs.bool(ctx, "tmdb_hero", true);
+    }
+
+    /** Options dialog: keep the app tiles off screen until Down. On unless switched off there. */
+    static boolean hideAppsUntilDown(Context ctx) {
+        return UserPrefs.bool(ctx, "hide_apps_until_down", true);
+    }
+
     static Config load(Context ctx) {
         Resources res = ctx.getResources();
         List<String> dock = new ArrayList<>(Arrays.asList(res.getStringArray(R.array.dock_apps)));

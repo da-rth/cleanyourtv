@@ -77,7 +77,7 @@ final class VpnBadge extends ReplacementSpan {
      */
     static int pillInkColor(boolean up, boolean focused) {
         if (up) return focused ? INK : GREEN;
-        return focused ? INK_OFF : RED;
+        return focused ? 0xFF000000 : RED;   // the open lock is black on the white focused pill, red otherwise
     }
 
     private static GradientDrawable pillShape(boolean up, float density) {

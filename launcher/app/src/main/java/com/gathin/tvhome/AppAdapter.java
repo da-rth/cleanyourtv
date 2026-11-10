@@ -61,6 +61,8 @@ public class AppAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         /** Hold OK on a tile: the activity shows the tile menu (move, remove from Home, app info). */
         void onTileLongPress(int position, View card);
         void onLibraryUp();
+        /** Left from the library pill: back to the last app of the row. */
+        default void onLibraryLeft() { onLibraryUp(); }
         /** A tile whose launch_actions entry is "input:<id>": switch to that TV input instead of opening an app. */
         void onOpenInput(String inputId);
     }
@@ -406,6 +408,9 @@ public class AppAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             button.setOnKeyListener((v, key, event) -> {
                 if (event.getAction() != KeyEvent.ACTION_DOWN) return false;
                 if (key == KeyEvent.KEYCODE_DPAD_UP) listener.onLibraryUp();
+                // Back along the row to the last app: Left, or Right in a mirrored layout.
+                boolean rtl = ctx.getResources().getBoolean(R.bool.rtl_app_grid);
+                if (key == (rtl ? KeyEvent.KEYCODE_DPAD_RIGHT : KeyEvent.KEYCODE_DPAD_LEFT)) listener.onLibraryLeft();
                 return key == KeyEvent.KEYCODE_DPAD_UP || key == KeyEvent.KEYCODE_DPAD_DOWN
                         || key == KeyEvent.KEYCODE_DPAD_LEFT || key == KeyEvent.KEYCODE_DPAD_RIGHT;
             });
@@ -850,7 +855,7 @@ public class AppAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         return Math.max(0, Math.min(255, Math.round(v)));
     }
 
-    private static int vividColor(Drawable live) {
+    static int vividColor(Drawable live) {
         if (live == null) return 0xFF444444;
         // Draw a private copy: changing the bounds of the drawable an ImageView shows would blank the tile.
         Drawable d = live.getConstantState() != null ? live.getConstantState().newDrawable().mutate() : live;

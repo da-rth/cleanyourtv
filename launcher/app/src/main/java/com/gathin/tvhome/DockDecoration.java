@@ -61,6 +61,9 @@ public class DockDecoration extends RecyclerView.ItemDecoration {
         edge.setColor(lightGlass ? 0x38FFFFFF : translucent ? 0x26FFFFFF : 0x1FFFFFFF);
     }
 
+    /** dock_corner_radius_dp: the band's corner radius in dp instead of the computed one; 0 keeps the computed radius. */
+    float cornerRadiusDp;
+
     /** Concentric corners: the band's radius is the tiles' radius plus the band's padding around them. */
     static float radiusPx(float tileRadiusPx, float paddingPx) {
         return tileRadiusPx + paddingPx;
@@ -146,6 +149,7 @@ public class DockDecoration extends RecyclerView.ItemDecoration {
             shaderTop = rect.top;
             shaderBottom = rect.bottom;
         }
+        if (cornerRadiusDp > 0) radius = Math.min(cornerRadiusDp * density, Math.min(rect.width(), rect.height()) / 2f);
         c.drawRoundRect(rect, radius, radius, band);
         c.drawRoundRect(rect, radius, radius, edge);
     }

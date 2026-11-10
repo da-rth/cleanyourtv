@@ -411,6 +411,21 @@
          shrink to fit from 5 up (about 144dp at 5, 117dp at 6 on a 1080p TV). -->
     <integer name="columns">4</integer>
 
+    <!-- How large Home draws, as a percentage of normal (50 to 150): text, pills, tiles and spacing together. Only
+         the launcher changes, not the TV or other apps. 100 is normal; a theme can set "ui_scale_percent". -->
+    <integer name="ui_scale_percent">75</integer>
+    <!-- A Continue watching shelf above the dock: the titles other apps (Netflix, Prime Video...) publish to Android TV's
+         Watch Next, most recent first; OK opens that title in its app. Needs READ_TV_LISTINGS
+         (pm grant com.gathin.tvhome android.permission.READ_TV_LISTINGS) and downloads the apps' posters.
+         A theme can set "continue_watching": true. -->
+    <bool name="continue_watching">false</bool>
+    <!-- Top-bar pills show only their icon until focused, then expand to show the label too (Inputs, Wi-Fi with the VPN
+         badge, Settings, the VPN pill). Use with icon_only_buttons. A theme can set "pills_expand_on_focus". -->
+    <bool name="pills_expand_on_focus">false</bool>
+    <!-- The dock band's corner radius in dp (0 to 60); 0 keeps the computed radius (the tiles' corners plus the band's
+         padding with dock_even_padding, else 26dp). A theme can set "dock_corner_radius_dp". -->
+    <integer name="dock_corner_radius_dp">0</integer>
+
     <!-- Basic motion is on; advanced effects are opt-in in the launcher's own Settings screen. -->
     <bool name="animations">true</bool>
     <bool name="advanced_effects">false</bool>

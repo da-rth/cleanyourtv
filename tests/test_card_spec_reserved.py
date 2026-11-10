@@ -134,7 +134,7 @@ class ReservedNames(unittest.TestCase):
 
     def test_app_library_pill_is_named(self):
         """The regression itself: the library pill's own name is a reserved label."""
-        self.assertIn("applibrary", self.listed)
+        self.assertIn("moreapps", self.listed)
 
     def test_default_home_dialog_is_named(self):
         """And so is the default-home dialog, which the table used to skip."""
